@@ -816,7 +816,7 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:3rem 0;}
       <div class="hero-btns">
         <a href="#layers" class="btn btn-primary">Explore the Platform →</a>
         <a href="#join" class="btn btn-ghost">Join the Community</a>
-        <a href="admin.html" class="btn btn-ghost" style="border-color:rgba(124,111,236,.35);color:var(--violet-lt);">⚡ Join Admin Team</a>
+        <a href="./admin.html" class="btn btn-ghost" style="border-color:rgba(124,111,236,.35);color:var(--violet-lt);">⚡ Join Admin Team</a>
       </div>
       <p class="hero-tagline">Built by students. Powered by curiosity.</p>
     </div>
@@ -984,6 +984,15 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:3rem 0;}
         <!-- Layer 3 label -->
         <div style="text-align:center;margin-bottom:1rem;">
           <span style="font-size:.65rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.18);border-radius:100px;padding:.22rem .8rem;">Layer 3 · Discussion Groups</span>
+        </div>
+
+        <!-- ⚠️ CONCEPTUAL NOTICE -->
+        <div style="display:flex;align-items:flex-start;gap:.75rem;background:rgba(251,191,36,.06);border:1.5px solid rgba(251,191,36,.25);border-radius:12px;padding:.95rem 1.15rem;margin-bottom:1rem;">
+          <span style="font-size:1.1rem;flex-shrink:0;margin-top:.05rem;">⚠️</span>
+          <div>
+            <span style="font-family:'Syne',sans-serif;font-size:.82rem;font-weight:800;color:var(--amber);">These groups are examples, not live communities.</span>
+            <span style="font-size:.8rem;color:var(--muted);display:block;margin-top:.22rem;line-height:1.6;">Nexus is just getting started. The discussion groups shown below are <strong style="color:rgba(238,238,246,.75)">proposed ideas</strong> to illustrate how the system works — they don't exist yet. The actual groups will be created by students like you. Want to start one? See the prompt below.</span>
+          </div>
         </div>
 
         <!-- Groups panel -->
@@ -1355,10 +1364,10 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:3rem 0;}
               <p style="font-size:.82rem;color:var(--muted);line-height:1.65;">We're actively looking for students passionate about any topic — from Social Discussion 🗣️ to Art 🎨, Environment 🌱, Anime 🍥, Sports ⚽, Startups 🚀, Books 📚, Board Games 🎲, Outdoors 🏔️, Running 🏃, and beyond. Send us your idea and we'll make it happen together.</p>
             </div>
             <div style="flex-shrink:0;">
-              <a href="mailto:nexussandringham@gmail.com?subject=Domain%20Proposal&body=Hi%2C%20I%27d%20like%20to%20propose%20a%20new%20domain%2Fgroup%3A%0A%0ADomain%20idea%3A%20%0AWhy%20I%27m%20interested%3A%20%0AMy%20name%20%26%20year%3A%20" style="display:inline-flex;align-items:center;gap:.5rem;background:var(--emerald);color:#0a2a1e;font-family:'Syne',sans-serif;font-weight:800;font-size:.85rem;padding:.75rem 1.4rem;border-radius:100px;text-decoration:none;transition:all .22s;white-space:nowrap;">
+              <a href="/cdn-cgi/l/email-protection#7f111a070a0c0c1e111b0d161118171e123f18121e1613511c1012400c0a1d151a1c0b423b10121e16115a4d4f2f0d100f100c1e13591d101b064237165a4d3c5a4d4f365a4d481b5a4d4f1316141a5a4d4f0b105a4d4f0f0d100f100c1a5a4d4f1e5a4d4f111a085a4d4f1b10121e16115a4d39180d100a0f5a4c3e5a4f3e5a4f3e3b10121e16115a4d4f161b1a1e5a4c3e5a4d4f5a4f3e2817065a4d4f365a4d48125a4d4f16110b1a0d1a0c0b1a1b5a4c3e5a4d4f5a4f3e32065a4d4f111e121a5a4d4f5a4d495a4d4f061a1e0d5a4c3e5a4d4f" style="display:inline-flex;align-items:center;gap:.5rem;background:var(--emerald);color:#0a2a1e;font-family:'Syne',sans-serif;font-weight:800;font-size:.85rem;padding:.75rem 1.4rem;border-radius:100px;text-decoration:none;transition:all .22s;white-space:nowrap;">
                 ✉️ Propose a domain
               </a>
-              <p style="font-size:.7rem;color:var(--muted);margin-top:.5rem;text-align:center;">nexussandringham@gmail.com</p>
+              <p style="font-size:.7rem;color:var(--muted);margin-top:.5rem;text-align:center;"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f19f9489848282909f9583989f9699909cb1969c90989ddf929e9c">[email&#160;protected]</a></p>
             </div>
           </div>
         </div>
@@ -1379,14 +1388,19 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:3rem 0;}
 
       <div class="join-form reveal" style="transition-delay:.1s">
         <div class="jf-title">Express Interest 👋</div>
-        <form id="member-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <div id="member-success" style="display:none;background:rgba(52,211,153,.08);border:1.5px solid rgba(52,211,153,.28);border-radius:12px;padding:1.35rem;text-align:center;">
+          <div style="font-size:1.8rem;margin-bottom:.5rem;">🎉</div>
+          <div style="font-family:'Syne',sans-serif;font-weight:800;color:var(--emerald);margin-bottom:.4rem;">Expression received!</div>
+          <div style="font-size:.85rem;color:var(--muted);">We'll send your Discord invite to your school email shortly.</div>
+        </div>
+        <form id="member-form">
           <div class="field">
             <label>Full Name <span style="color:var(--rose)">*</span></label>
-            <input type="text" name="full_name" placeholder="e.g. Jordan Smith" required>
+            <input type="text" id="m-name" placeholder="e.g. Jordan Smith" required>
           </div>
           <div class="field">
             <label>Year Level <span style="color:var(--rose)">*</span></label>
-            <select name="year_level" required>
+            <select id="m-year" required>
               <option value="" disabled selected>Select your year</option>
               <option>Year 9</option>
               <option>Year 10</option>
@@ -1396,31 +1410,30 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:3rem 0;}
           </div>
           <div class="field">
             <label>School Email Address <span style="color:var(--rose)">*</span></label>
-            <input type="email" name="school_email" placeholder="yourname@student.school.edu.au" required>
+            <input type="email" id="m-email" placeholder="yourname@student.school.edu.au" required>
           </div>
           <div class="field">
             <label>Interested Domains <span style="color:var(--rose)">*</span></label>
             <div class="chips" id="member-chips">
-              <button type="button" class="chip" onclick="toggleChip(this,'member-domains')">🗣️ Social</button>
-              <button type="button" class="chip" onclick="toggleChip(this,'member-domains')">🎨 Art</button>
-              <button type="button" class="chip" onclick="toggleChip(this,'member-domains')">🌱 Environment</button>
-              <button type="button" class="chip" onclick="toggleChip(this,'member-domains')">🍥 Anime</button>
-              <button type="button" class="chip" onclick="toggleChip(this,'member-domains')">⚽ Sports</button>
-              <button type="button" class="chip" onclick="toggleChip(this,'member-domains')">🚀 Startups</button>
-              <button type="button" class="chip" onclick="toggleChip(this,'member-domains')">📚 Books</button>
-              <button type="button" class="chip" onclick="toggleChip(this,'member-domains')">🎲 Board Games</button>
-              <button type="button" class="chip" onclick="toggleChip(this,'member-domains')">🏔️ Outdoors</button>
-              <button type="button" class="chip" onclick="toggleChip(this,'member-domains')">🏃 Running</button>
+              <button type="button" class="chip" onclick="this.classList.toggle('on')">🗣️ Social</button>
+              <button type="button" class="chip" onclick="this.classList.toggle('on')">🎨 Art</button>
+              <button type="button" class="chip" onclick="this.classList.toggle('on')">🌱 Environment</button>
+              <button type="button" class="chip" onclick="this.classList.toggle('on')">🍥 Anime</button>
+              <button type="button" class="chip" onclick="this.classList.toggle('on')">⚽ Sports</button>
+              <button type="button" class="chip" onclick="this.classList.toggle('on')">🚀 Startups</button>
+              <button type="button" class="chip" onclick="this.classList.toggle('on')">📚 Books</button>
+              <button type="button" class="chip" onclick="this.classList.toggle('on')">🎲 Board Games</button>
+              <button type="button" class="chip" onclick="this.classList.toggle('on')">🏔️ Outdoors</button>
+              <button type="button" class="chip" onclick="this.classList.toggle('on')">🏃 Running</button>
             </div>
-            <input type="hidden" name="interested_domains" id="member-domains">
           </div>
-          <button type="submit" class="btn-submit">Submit Expression of Interest →</button>
+          <button type="button" class="btn-submit" id="m-btn" onclick="submitMemberForm()">Submit Expression of Interest →</button>
           <p style="font-size:.73rem;color:var(--dim);text-align:center;margin-top:.75rem;">We'll send your Discord invite to your school email shortly.</p>
         </form>
 
         <!-- Admin recruitment link -->
         <div style="margin-top:1.75rem;border-top:1px solid var(--border);padding-top:1.5rem;">
-          <a href="admin.html" style="display:flex;align-items:center;gap:1rem;background:linear-gradient(135deg,rgba(124,111,236,.1),rgba(124,111,236,.04));border:1.5px solid rgba(124,111,236,.28);border-radius:14px;padding:1.15rem 1.35rem;text-decoration:none;transition:all .25s;" onmouseover="this.style.borderColor='rgba(124,111,236,.55)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='rgba(124,111,236,.28)';this.style.transform='translateY(0)'">
+          <a href="./admin.html" style="display:flex;align-items:center;gap:1rem;background:linear-gradient(135deg,rgba(124,111,236,.1),rgba(124,111,236,.04));border:1.5px solid rgba(124,111,236,.28);border-radius:14px;padding:1.15rem 1.35rem;text-decoration:none;transition:all .25s;" onmouseover="this.style.borderColor='rgba(124,111,236,.55)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='rgba(124,111,236,.28)';this.style.transform='translateY(0)'">
             <div style="font-size:1.8rem;flex-shrink:0;">⚡</div>
             <div style="flex:1;">
               <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:.95rem;color:var(--violet-lt);margin-bottom:.2rem;">Want to be part of the Admin Team?</div>
@@ -1447,14 +1460,14 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:3rem 0;}
         <a href="#safety">Safety</a>
         <a href="#teachers">Teachers</a>
         <a href="#join">Get Involved</a>
-        <a href="admin.html" style="color:var(--violet-lt);">⚡ Admin Team</a>
+        <a href="./admin.html" style="color:var(--violet-lt);">⚡ Admin Team</a>
       </div>
       <div class="foot-copy">© 2025 Nexus. A prototype platform.</div>
     </div>
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* ── Scroll reveal ── */
 const allItems = document.querySelectorAll('.reveal, .ef-step');
 const io = new IntersectionObserver((entries) => {
@@ -1684,34 +1697,54 @@ window.addEventListener('resize', () => {
   drawDomainToGroups();
 });
 
-/* ── Chip toggle helper ── */
-function toggleChip(btn, hiddenId) {
-  btn.classList.toggle('on');
-  const selected = [...btn.closest('.chips').querySelectorAll('.chip.on')].map(c => c.textContent.trim());
-  document.getElementById(hiddenId).value = selected.join(', ');
-}
+/* ══════════════════════════════════
+   FORM SUBMISSION
+   Uses Google Apps Script (unlimited & free).
+   Replace MEMBER_SCRIPT_URL below with your deployed Apps Script URL.
+   See setup instructions in the README.
+══════════════════════════════════ */
+const MEMBER_SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL_HERE';
 
-/* ── Member form submit ── */
-const memberForm = document.getElementById('member-form');
-if (memberForm) {
-  memberForm.addEventListener('submit', function(e) {
-    const domains = document.getElementById('member-domains').value;
-    if (!domains) {
-      e.preventDefault();
-      alert('Please select at least one domain of interest. 👆');
-    }
-  });
-}
+function submitMemberForm() {
+  const name    = document.getElementById('m-name').value.trim();
+  const year    = document.getElementById('m-year').value;
+  const email   = document.getElementById('m-email').value.trim();
+  const domains = [...document.querySelectorAll('#member-chips .chip.on')]
+                    .map(c => c.textContent.trim()).join(', ');
 
-/* ── Admin form submit (admin.html) ── */
-const adminForm = document.getElementById('admin-form');
-if (adminForm) {
-  adminForm.addEventListener('submit', function(e) {
-    const role = document.getElementById('admin-roles').value;
-    if (!role) {
-      e.preventDefault();
-      alert('Please select at least one admin role interest. 👆');
-    }
+  if (!name)    { alert('Please enter your full name.'); return; }
+  if (!year)    { alert('Please select your year level.'); return; }
+  if (!email)   { alert('Please enter your school email address.'); return; }
+  if (!domains) { alert('Please select at least one domain. 👆'); return; }
+
+  const btn = document.getElementById('m-btn');
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
+
+  /* If Apps Script not yet set up, fall back to Gmail compose */
+  if (MEMBER_SCRIPT_URL === 'YOUR_APPS_SCRIPT_URL_HERE') {
+    const subject = encodeURIComponent('[Nexus] Member Expression of Interest');
+    const body = encodeURIComponent(
+      'Name: ' + name + '\nYear Level: ' + year +
+      '\nSchool Email: ' + email + '\nInterested Domains: ' + domains
+    );
+    window.open('https://mail.google.com/mail/?view=cm&to=nexussandringham%40gmail.com&su=' + subject + '&body=' + body, '_blank');
+    document.getElementById('member-form').style.display = 'none';
+    document.getElementById('member-success').style.display = 'block';
+    return;
+  }
+
+  fetch(MEMBER_SCRIPT_URL, {
+    method: 'POST', mode: 'no-cors',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({ type:'member', name, year, email, domains })
+  }).then(() => {
+    document.getElementById('member-form').style.display = 'none';
+    document.getElementById('member-success').style.display = 'block';
+  }).catch(() => {
+    btn.textContent = 'Submit Expression of Interest →';
+    btn.disabled = false;
+    alert('Something went wrong. Please email nexussandringham@gmail.com directly.');
   });
 }
 </script>
