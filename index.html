@@ -46,6 +46,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:62px;padding:0 2rem;d
 
 /* PULSE */
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.6)}}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
 /* ════ HERO ════ */
 .hero-wrap{padding-top:calc(62px + 5rem);padding-bottom:5rem;position:relative;overflow:hidden;}
@@ -194,6 +195,7 @@ footer{background:var(--bg3);border-top:1px solid var(--bd);padding:2.25rem 0;}
     <a href="#pillars">What you get</a>
     <a href="#how">How it works</a>
     <a href="#join">Join</a>
+    <a href="./structure.html">How it's organised</a>
     <a href="./status.html">Status</a>
   </div>
   <a href="./admin.html" class="nav-cta">⚡ Build with us</a>
@@ -212,12 +214,12 @@ footer{background:var(--bg3);border-top:1px solid var(--bd);padding:2.25rem 0;}
       </div>
 
       <h1 class="hero-title">
-        For students who want<br>
-        <em>more than school gives them.</em>
+        Whatever you're into —<br>
+        <em>there's someone here for it.</em>
       </h1>
 
       <p class="hero-sub">
-        A student-run community in Australia. Find people who share your interests, go deep on topics that actually matter to you, and build something real — together.
+        Chess, skiing, café runs, UNO nights, social debate, art, running — whatever it is, Nexus is where you find the people who are just as into it as you are.
       </p>
 
       <div class="hero-btns">
@@ -225,7 +227,7 @@ footer{background:var(--bg3);border-top:1px solid var(--bd);padding:2.25rem 0;}
         <a href="#pillars" class="btn btn-outline">See what you get</a>
       </div>
 
-      <p class="hero-tagline">Built by students · No schools involved · Australia</p>
+      <p class="hero-tagline">No schools · No syllabus · Just people who get it</p>
 
       <!-- Status -->
       <div class="status-card">
@@ -252,25 +254,69 @@ footer{background:var(--bg3);border-top:1px solid var(--bd);padding:2.25rem 0;}
   </div>
 </div>
 
+<!-- ACTIVITY TICKER -->
+<div style="background:var(--sf);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);overflow:hidden;padding:.65rem 0;position:relative;">
+  <div style="position:absolute;left:0;top:0;bottom:0;width:60px;background:linear-gradient(90deg,var(--sf),transparent);z-index:2;pointer-events:none;"></div>
+  <div style="position:absolute;right:0;top:0;bottom:0;width:60px;background:linear-gradient(270deg,var(--sf),transparent);z-index:2;pointer-events:none;"></div>
+  <div style="display:flex;gap:0;animation:ticker 28s linear infinite;width:max-content;">
+    <div style="display:flex;gap:2rem;padding-right:2rem;white-space:nowrap;font-size:.8rem;font-weight:600;color:var(--muted);">
+      <span>☕ Café runs</span><span style="color:var(--dim);">·</span>
+      <span>♟️ Chess</span><span style="color:var(--dim);">·</span>
+      <span>🎿 Skiing</span><span style="color:var(--dim);">·</span>
+      <span>🃏 UNO nights</span><span style="color:var(--dim);">·</span>
+      <span>🏃 Running</span><span style="color:var(--dim);">·</span>
+      <span>🗣️ Social debate</span><span style="color:var(--dim);">·</span>
+      <span>🎨 Art</span><span style="color:var(--dim);">·</span>
+      <span>🌱 Environment</span><span style="color:var(--dim);">·</span>
+      <span>🏀 Basketball</span><span style="color:var(--dim);">·</span>
+      <span>🚀 Startups</span><span style="color:var(--dim);">·</span>
+      <span>🎵 Music</span><span style="color:var(--dim);">·</span>
+      <span>📚 Books</span><span style="color:var(--dim);">·</span>
+      <span>🎬 Film</span><span style="color:var(--dim);">·</span>
+      <span>🎲 Board Games</span><span style="color:var(--dim);">·</span>
+      <span>🏔️ Outdoors</span><span style="color:var(--dim);">·</span>
+      <span>🍥 Anime</span><span style="color:var(--dim);">·</span>
+    </div>
+    <div style="display:flex;gap:2rem;padding-right:2rem;white-space:nowrap;font-size:.8rem;font-weight:600;color:var(--muted);">
+      <span>☕ Café runs</span><span style="color:var(--dim);">·</span>
+      <span>♟️ Chess</span><span style="color:var(--dim);">·</span>
+      <span>🎿 Skiing</span><span style="color:var(--dim);">·</span>
+      <span>🃏 UNO nights</span><span style="color:var(--dim);">·</span>
+      <span>🏃 Running</span><span style="color:var(--dim);">·</span>
+      <span>🗣️ Social debate</span><span style="color:var(--dim);">·</span>
+      <span>🎨 Art</span><span style="color:var(--dim);">·</span>
+      <span>🌱 Environment</span><span style="color:var(--dim);">·</span>
+      <span>🏀 Basketball</span><span style="color:var(--dim);">·</span>
+      <span>🚀 Startups</span><span style="color:var(--dim);">·</span>
+      <span>🎵 Music</span><span style="color:var(--dim);">·</span>
+      <span>📚 Books</span><span style="color:var(--dim);">·</span>
+      <span>🎬 Film</span><span style="color:var(--dim);">·</span>
+      <span>🎲 Board Games</span><span style="color:var(--dim);">·</span>
+      <span>🏔️ Outdoors</span><span style="color:var(--dim);">·</span>
+      <span>🍥 Anime</span><span style="color:var(--dim);">·</span>
+    </div>
+  </div>
+</div>
+
 <!-- PAIN -->
 <section style="background:var(--bg2);padding:5rem 0;">
   <div class="wrap">
     <div class="reveal" style="text-align:center;margin-bottom:0;">
-      <span style="font-size:.67rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--vlt);display:block;margin-bottom:.7rem;">Does this sound like you?</span>
-      <h2 style="font-family:'Syne',sans-serif;font-size:clamp(1.5rem,3.5vw,2.1rem);font-weight:800;letter-spacing:-.025em;">The conversations you actually want aren't happening.</h2>
+      <span style="font-size:.67rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--vlt);display:block;margin-bottom:.7rem;">Sound familiar?</span>
+      <h2 style="font-family:'Syne',sans-serif;font-size:clamp(1.5rem,3.5vw,2.1rem);font-weight:800;letter-spacing:-.025em;">Your people are out there. You just haven't found them yet.</h2>
     </div>
     <div class="pain-grid reveal" style="transition-delay:.08s;">
       <div class="pain-card">
         <div class="pain-mark">💭</div>
-        <p>You have <strong>opinions and ideas</strong> you want to talk through — but no one around you seems interested in going that deep.</p>
+        <p>You have <strong>things you love</strong> — a game, a sport, an obsession — but the people around you aren't that into it.</p>
       </div>
       <div class="pain-card">
         <div class="pain-mark">🔗</div>
-        <p>You know there are <strong>students like you</strong> out there — curious, motivated, passionate — but you haven't found them yet.</p>
+        <p>You want to <strong>actually do things</strong> with people — meet up, play, debate, explore — not just scroll and scroll.</p>
       </div>
       <div class="pain-card">
         <div class="pain-mark">🌍</div>
-        <p>You want to connect with the <strong>real world</strong> — not just wait until after school.</p>
+        <p>You want to find <strong>your people</strong> — whoever they are, wherever they go to school.</p>
       </div>
     </div>
   </div>
@@ -290,25 +336,25 @@ footer{background:var(--bg3);border-top:1px solid var(--bd);padding:2.25rem 0;}
       <div>
         <div class="pillar-num" style="color:var(--violet);">01</div>
         <span class="pillar-lbl" style="color:var(--vlt);">💬 Talk</span>
-        <h3 class="pillar-title">Real conversations on topics that actually matter.</h3>
-        <p class="pillar-body">Not small talk. Nexus is built around focused interest domains — Social Discussion, Environment, Startups, Art, and more. Inside each, groups go deep on one specific topic. No marks. No syllabus.</p>
-        <p class="pillar-body" style="margin-bottom:0;">Just honest discussion between people who chose to be there.</p>
+        <h3 class="pillar-title">Talk about what you actually care about.</h3>
+        <p class="pillar-body">Chess strategy, climate policy, café culture, skiing routes, philosophy, UNO tactics, music, film, running — anything. Nexus is organised around what people actually want to talk about.</p>
+        <p class="pillar-body" style="margin-bottom:0;">No grades. No pressure. Just people who chose to show up for the same thing.</p>
       </div>
       <div class="pillar-visual reveal" style="transition-delay:.1s;">
         <div style="font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.8rem;">What it looks like</div>
         <div class="disc-window">
-          <div class="disc-top">💬 # group-poverty-inequality</div>
+          <div class="disc-top">💬 # what-are-you-into</div>
           <div class="disc-msg">
             <div class="disc-name" style="color:#a89fff;">@Alex</div>
-            <div class="disc-text">The Grattan report on intergenerational poverty is wild — did anyone read it?</div>
+            <div class="disc-text">anyone here ski? looking for people to hit the slopes with this winter</div>
           </div>
           <div class="disc-msg">
             <div class="disc-name" style="color:#6ee7b7;">@Jordan</div>
-            <div class="disc-text">Yeah the housing cost section. I wrote notes — want to share here?</div>
+            <div class="disc-text">yes!! also down for chess if anyone's free saturday</div>
           </div>
           <div class="disc-msg">
             <div class="disc-name" style="color:#fbbf24;">@Sam</div>
-            <div class="disc-text">Please do. Also thinking about structural vs personal agency from last week...</div>
+            <div class="disc-text">I'm in for chess. can we do a café run after? I know a good spot</div>
           </div>
         </div>
       </div>
@@ -319,9 +365,9 @@ footer{background:var(--bg3);border-top:1px solid var(--bd);padding:2.25rem 0;}
       <div>
         <div class="pillar-num" style="color:var(--emerald);">02</div>
         <span class="pillar-lbl" style="color:var(--emerald);">🤝 Connect</span>
-        <h3 class="pillar-title">Find your people. Across schools, year levels, regions.</h3>
-        <p class="pillar-body">Nexus is independent of any school. You'll meet students from across Australia who share your interests — not just whoever sits next to you in class.</p>
-        <p class="pillar-body" style="margin-bottom:0;">Groups are kept small and tight-knit on purpose. Every member chose to be there for the same reason you did.</p>
+        <h3 class="pillar-title">Find your people. Whoever they are.</h3>
+        <p class="pillar-body">Nexus has nothing to do with school. You might find someone who runs every morning, or someone who's obsessed with chess, or someone who just wants a coffee and good conversation.</p>
+        <p class="pillar-body" style="margin-bottom:0;">Groups stay small on purpose. The person next to you chose to be there for the exact same reason you did.</p>
       </div>
       <div class="pillar-visual reveal" style="transition-delay:.1s;">
         <div style="font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.8rem;">How it works</div>
@@ -347,9 +393,9 @@ footer{background:var(--bg3);border-top:1px solid var(--bd);padding:2.25rem 0;}
       <div>
         <div class="pillar-num" style="color:var(--amber);">03</div>
         <span class="pillar-lbl" style="color:var(--amber);">🚀 Build</span>
-        <h3 class="pillar-title">Take it offline. Connect with the world.</h3>
-        <p class="pillar-body">Groups meet in real life — cafés, parks, libraries, wherever. And through the admin team, Nexus connects students to external organisations and other school communities.</p>
-        <p class="pillar-body" style="margin-bottom:0;">The conversations you start here can go further than you'd expect.</p>
+        <h3 class="pillar-title">Then actually go do it — in real life.</h3>
+        <p class="pillar-body">A café. A court. A mountain. A library corner. Wherever the thing you love happens — that's where Nexus goes. Online is just the starting point.</p>
+        <p class="pillar-body" style="margin-bottom:0;">The people you meet here can become the people you actually do things with.</p>
       </div>
       <div class="pillar-visual reveal" style="transition-delay:.1s;">
         <div style="font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.8rem;">Where it can go</div>
@@ -370,15 +416,15 @@ footer{background:var(--bg3);border-top:1px solid var(--bd);padding:2.25rem 0;}
   <div class="wrap">
     <div class="reveal" style="text-align:center;margin-bottom:0;">
       <span style="font-size:.67rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--vlt);display:block;margin-bottom:.7rem;">Is this for you?</span>
-      <h2 style="font-family:'Syne',sans-serif;font-size:clamp(1.5rem,3.5vw,2.1rem);font-weight:800;letter-spacing:-.025em;">Nexus is for you if...</h2>
+      <h2 style="font-family:'Syne',sans-serif;font-size:clamp(1.5rem,3.5vw,2.1rem);font-weight:800;letter-spacing:-.025em;">Nexus is for you if you...</h2>
     </div>
     <div class="for-you-grid reveal" style="transition-delay:.08s;">
-      <div class="for-you-item"><div class="fyi-check">✓</div><p>You have <strong>opinions and ideas</strong> you want to discuss — seriously.</p></div>
-      <div class="for-you-item"><div class="fyi-check">✓</div><p>You want to meet <strong>students beyond your school</strong> who think like you.</p></div>
-      <div class="for-you-item"><div class="fyi-check">✓</div><p>You're curious about <strong>social issues, art, science, startups</strong> — and want to go deeper.</p></div>
+      <div class="for-you-item"><div class="fyi-check">✓</div><p>You're <strong>really into something</strong> — a sport, a game, an idea — and you want people to share it with.</p></div>
+      <div class="for-you-item"><div class="fyi-check">✓</div><p>Want to meet <strong>people beyond your school</strong> — whoever they are, wherever they're from.</p></div>
+      <div class="for-you-item"><div class="fyi-check">✓</div><p>You want to <strong>actually meet up</strong> — ski, run, debate, play — not just chat online.</p></div>
       <div class="for-you-item"><div class="fyi-check">✓</div><p>You want to <strong>take action</strong> — meet in person, collaborate, connect with the real world.</p></div>
-      <div class="for-you-item"><div class="fyi-check">✓</div><p>You want to <strong>build something</strong>, not just be a member of something someone else made.</p></div>
-      <div class="for-you-item"><div class="fyi-check">✓</div><p>You're in <strong>Australia, in high school</strong>, and you're ready to show up.</p></div>
+      <div class="for-you-item"><div class="fyi-check">✓</div><p>Want to <strong>build something</strong> from scratch — not just join something already finished.</p></div>
+      <div class="for-you-item"><div class="fyi-check">✓</div><p>Are in <strong>Australia, in high school</strong>, and actually ready to show up.</p></div>
     </div>
     <div class="reveal" style="text-align:center;margin-top:2.25rem;">
       <a href="#join" class="btn btn-primary">That's me — join Nexus →</a>
@@ -438,22 +484,14 @@ footer{background:var(--bg3);border-top:1px solid var(--bd);padding:2.25rem 0;}
 <!-- VOICES -->
 <section style="padding:5rem 0;">
   <div class="wrap">
-    <div class="reveal" style="text-align:center;margin-bottom:0;">
-      <span style="font-size:.67rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--vlt);display:block;margin-bottom:.7rem;">Why students join</span>
-      <h2 style="font-family:'Syne',sans-serif;font-size:clamp(1.5rem,3.5vw,2.1rem);font-weight:800;letter-spacing:-.025em;">What we're building this for.</h2>
-    </div>
-    <div class="voices-grid reveal" style="transition-delay:.08s;">
-      <div class="voice">
-        <p class="voice-text">I want to talk about things like climate policy and economics with people who are actually into it — not just whoever's in my class.</p>
-        <div class="voice-name">— Year 11 student, Sydney</div>
-      </div>
-      <div class="voice">
-        <p class="voice-text">The best conversations I've had are with people who share my curiosity. School doesn't give me that. I've been looking for a space that does.</p>
-        <div class="voice-name">— Year 10 student, Melbourne</div>
-      </div>
-      <div class="voice">
-        <p class="voice-text">I want to build something real while I'm still in school. Being part of something from the very start is exactly what I've been looking for.</p>
-        <div class="voice-name">— Year 12 student, Brisbane</div>
+    <div class="reveal" style="max-width:680px;margin:0 auto;">
+      <span style="font-size:.67rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--vlt);display:block;margin-bottom:.7rem;">Why Nexus exists</span>
+      <h2 style="font-family:'Syne',sans-serif;font-size:clamp(1.5rem,3.5vw,2.1rem);font-weight:800;letter-spacing:-.025em;margin-bottom:1.25rem;">Built from a real frustration.</h2>
+      <div style="background:var(--sf);border:1px solid var(--bd);border-radius:16px;padding:1.75rem;position:relative;overflow:hidden;">
+        <div style="position:absolute;top:0;left:0;bottom:0;width:3px;background:var(--violet);border-radius:3px 0 0 3px;"></div>
+        <p style="font-size:1rem;color:var(--text);line-height:1.8;margin-bottom:1rem;padding-left:.5rem;">I'm 16, studying in Australia. I was doing an online internship with a company in Bangladesh when I was told to stop — it was flagged as suspicious. That didn't sit right with me.</p>
+        <p style="font-size:.92rem;color:var(--muted);line-height:1.8;padding-left:.5rem;">The internet is already where young people build connections, find opportunities, and figure out who they are. Restricting that without building something better in its place just leaves people more isolated — not safer. Nexus is my attempt to build something better. A space that's safe by design, student-run, and built around the things you actually want to do — not what anyone else thinks you should.</p>
+        <div style="margin-top:1.1rem;padding-left:.5rem;font-size:.8rem;font-weight:700;color:var(--dim);">— Founder, Nexus · 16 · Australia</div>
       </div>
     </div>
   </div>
@@ -465,7 +503,7 @@ footer{background:var(--bg3);border-top:1px solid var(--bd);padding:2.25rem 0;}
     <div class="reveal" style="text-align:center;">
       <span style="font-size:.67rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--vlt);display:block;margin-bottom:.7rem;">Get Involved</span>
       <h2 style="font-family:'Syne',sans-serif;font-size:clamp(1.5rem,3.5vw,2.1rem);font-weight:800;letter-spacing:-.025em;">Join Nexus.</h2>
-      <p style="font-size:.95rem;color:var(--muted);margin-top:.55rem;">Fill in your details and we'll send you the Discord invite.</p>
+      <p style="font-size:.95rem;color:var(--muted);margin-top:.55rem;">Tell us what you're into and we'll send you the invite.</p>
     </div>
 
     <div class="join-form reveal" style="transition-delay:.1s;">
@@ -493,9 +531,14 @@ footer{background:var(--bg3);border-top:1px solid var(--bd);padding:2.25rem 0;}
           <input type="email" id="m-email" placeholder="yourname@email.com" required>
         </div>
         <div class="field">
-          <label>Interested Domains <span style="color:var(--rose)">*</span></label>
+          <label>What are you into? <span style="color:var(--rose)">*</span></label>
           <div class="chips" id="member-chips">
-            <button type="button" class="chip" onclick="this.classList.toggle('on')">🗣️ Social</button>
+            <button type="button" class="chip" onclick="this.classList.toggle('on')">☕ Café</button>
+            <button type="button" class="chip" onclick="this.classList.toggle('on')">🏃 Running</button>
+            <button type="button" class="chip" onclick="this.classList.toggle('on')">♟️ Chess</button>
+            <button type="button" class="chip" onclick="this.classList.toggle('on')">🎿 Skiing</button>
+            <button type="button" class="chip" onclick="this.classList.toggle('on')">🃏 UNO / Card Games</button>
+            <button type="button" class="chip" onclick="this.classList.toggle('on')">🗣️ Social Discussion</button>
             <button type="button" class="chip" onclick="this.classList.toggle('on')">🎨 Art</button>
             <button type="button" class="chip" onclick="this.classList.toggle('on')">🌱 Environment</button>
             <button type="button" class="chip" onclick="this.classList.toggle('on')">🍥 Anime</button>
@@ -504,7 +547,10 @@ footer{background:var(--bg3);border-top:1px solid var(--bd);padding:2.25rem 0;}
             <button type="button" class="chip" onclick="this.classList.toggle('on')">📚 Books</button>
             <button type="button" class="chip" onclick="this.classList.toggle('on')">🎲 Board Games</button>
             <button type="button" class="chip" onclick="this.classList.toggle('on')">🏔️ Outdoors</button>
-            <button type="button" class="chip" onclick="this.classList.toggle('on')">🏃 Running</button>
+            <button type="button" class="chip" onclick="this.classList.toggle('on')">🎵 Music</button>
+            <button type="button" class="chip" onclick="this.classList.toggle('on')">🎬 Film</button>
+            <button type="button" class="chip" onclick="this.classList.toggle('on')">🏀 Basketball</button>
+            <button type="button" class="chip" onclick="this.classList.toggle('on')">✏️ Something else</button>
           </div>
         </div>
         <button type="button" class="btn-submit" id="m-btn" onclick="submitMemberForm()">Submit →</button>
