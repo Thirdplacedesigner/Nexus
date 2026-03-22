@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How Nexus is Organised — Nexus</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#09090e;--bg2:#0e0e16;--bg3:#12121c;
+  --sf:#16161f;--sf2:#1c1c28;
+  --bd:rgba(255,255,255,.07);--bd2:rgba(255,255,255,.04);
+  --violet:#7c6fec;--vlt:#a89fff;--vg:rgba(124,111,236,.2);
+  --emerald:#34d399;--amber:#fbbf24;--sky:#38bdf8;--rose:#f87171;
+  --text:#eeeef6;--muted:#888899;--dim:#44445a;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;line-height:1.65;overflow-x:hidden;}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.5;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");}
+h1,h2,h3,h4{font-family:'Syne',sans-serif;}
+.wrap{max-width:880px;margin:0 auto;padding:0 1.75rem;}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .5s,transform .5s;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:62px;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;background:rgba(9,9,14,.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--bd);}
+.nav-back{display:flex;align-items:center;gap:.45rem;text-decoration:none;color:var(--muted);font-size:.84rem;font-weight:500;transition:color .2s;}
+.nav-back:hover{color:var(--text);}
+.nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.15rem;background:linear-gradient(135deg,#fff 40%,var(--vlt));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+/* PAGE HEADER */
+.page-head{padding:calc(62px + 4rem) 0 3.5rem;}
+.lbl{font-size:.67rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--vlt);display:block;margin-bottom:.9rem;}
+.page-head h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:800;letter-spacing:-.03em;line-height:1.05;margin-bottom:1rem;}
+.page-head p{font-size:1.05rem;color:var(--muted);max-width:580px;line-height:1.75;}
+
+/* SECTION SPACING */
+.section{padding:4rem 0;border-top:1px solid var(--bd);}
+
+/* ROLE CARDS */
+.role-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.75rem;}
+.role-card{background:var(--sf);border:1px solid var(--bd);border-radius:14px;padding:1.4rem;position:relative;overflow:hidden;}
+.role-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.role-card.violet::before{background:var(--violet);}
+.role-card.emerald::before{background:var(--emerald);}
+.role-card.amber::before{background:var(--amber);}
+.role-card.sky::before{background:var(--sky);}
+.role-icon{font-size:1.5rem;margin-bottom:.7rem;}
+.role-title{font-family:'Syne',sans-serif;font-weight:800;font-size:.95rem;margin-bottom:.35rem;}
+.role-sub{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.65rem;}
+.role-sub.violet{color:var(--vlt);}
+.role-sub.emerald{color:var(--emerald);}
+.role-sub.amber{color:var(--amber);}
+.role-sub.sky{color:var(--sky);}
+.role-body{font-size:.85rem;color:var(--muted);line-height:1.65;}
+
+/* RESPONSIBILITY LIST */
+.resp-list{display:flex;flex-direction:column;gap:.45rem;margin-top:.8rem;}
+.resp-item{display:flex;align-items:flex-start;gap:.6rem;font-size:.82rem;color:var(--muted);line-height:1.55;}
+.resp-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:.5rem;}
+.resp-dot.violet{background:var(--violet);}
+.resp-dot.emerald{background:var(--emerald);}
+.resp-dot.amber{background:var(--amber);}
+.resp-dot.sky{background:var(--sky);}
+
+/* LAYER DIAGRAM */
+.layer-stack{display:flex;flex-direction:column;gap:0;margin-top:1.75rem;}
+.layer-item{padding:1.25rem 1.5rem;border:1px solid var(--bd);background:var(--sf);}
+.layer-item:first-child{border-radius:14px 14px 0 0;}
+.layer-item:last-child{border-radius:0 0 14px 14px;border-top:none;}
+.layer-item:not(:first-child):not(:last-child){border-top:none;}
+.layer-num{font-size:.65rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;margin-bottom:.4rem;}
+.layer-name{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;margin-bottom:.3rem;}
+.layer-desc{font-size:.84rem;color:var(--muted);line-height:1.6;}
+.layer-arrow{text-align:center;font-size:.9rem;color:var(--dim);padding:.35rem 0;background:var(--bg2);border-left:1px solid var(--bd);border-right:1px solid var(--bd);}
+
+/* FLOW DIAGRAM */
+.flow{display:flex;flex-direction:column;gap:0;max-width:600px;margin-top:1.75rem;}
+.flow-step{display:flex;gap:1rem;padding-bottom:1.25rem;position:relative;}
+.flow-step:not(:last-child)::after{content:'';position:absolute;left:13px;top:28px;bottom:0;width:2px;background:var(--bd);}
+.flow-num{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:.72rem;flex-shrink:0;position:relative;z-index:1;background:var(--bg);}
+.flow-step h4{font-family:'Syne',sans-serif;font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:.12rem;padding-top:.05rem;}
+.flow-step p{font-size:.8rem;color:var(--muted);line-height:1.55;}
+
+/* SAFETY GRID */
+.safety-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.9rem;margin-top:1.75rem;}
+.safety-item{background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:1.1rem;}
+.safety-item h4{font-family:'Syne',sans-serif;font-size:.85rem;font-weight:700;margin-bottom:.35rem;}
+.safety-item p{font-size:.8rem;color:var(--muted);line-height:1.55;}
+
+/* RULE LIST */
+.rule-list{display:flex;flex-direction:column;gap:.5rem;margin-top:1.25rem;}
+.rule{display:flex;align-items:flex-start;gap:.75rem;padding:.8rem 1rem;background:var(--sf);border:1px solid var(--bd);border-radius:9px;}
+.rule-mark{font-family:'Syne',sans-serif;font-size:.72rem;font-weight:800;color:var(--vlt);flex-shrink:0;padding-top:.15rem;letter-spacing:.05em;}
+.rule p{font-size:.84rem;color:var(--muted);line-height:1.55;}
+.rule p strong{color:var(--text);}
+
+/* INFO BOX */
+.info-box{background:var(--sf2);border:1px solid var(--bd);border-radius:12px;padding:1.25rem 1.4rem;margin-top:1.25rem;}
+.info-box p{font-size:.86rem;color:var(--muted);line-height:1.7;}
+.info-box p strong{color:var(--text);}
+
+/* CTA */
+.cta-row{display:flex;gap:.75rem;flex-wrap:wrap;padding:3.5rem 0 4rem;}
+.btn{display:inline-flex;align-items:center;gap:.4rem;padding:.68rem 1.4rem;border-radius:100px;font-family:'Syne',sans-serif;font-weight:700;font-size:.86rem;text-decoration:none;transition:all .2s;}
+.btn-primary{background:var(--violet);color:#fff;box-shadow:0 0 20px var(--vg);}
+.btn-primary:hover{transform:translateY(-2px);}
+.btn-outline{background:transparent;color:var(--text);border:1px solid var(--bd);}
+.btn-outline:hover{background:var(--sf);transform:translateY(-2px);}
+
+/* FOOTER */
+footer{border-top:1px solid var(--bd);padding:2rem 0;}
+.foot-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+.foot-brand{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;background:linear-gradient(135deg,#fff,var(--vlt));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.foot-sub{font-size:.7rem;color:var(--dim);margin-top:.12rem;}
+.foot-links{display:flex;gap:1.3rem;flex-wrap:wrap;}
+.foot-links a{font-size:.78rem;color:var(--dim);text-decoration:none;transition:color .2s;}
+.foot-links a:hover{color:var(--text);}
+
+/* RESPONSIVE */
+@media(max-width:720px){
+  .role-grid{grid-template-columns:1fr;}
+  .safety-grid{grid-template-columns:1fr 1fr;}
+  nav{padding:0 1.1rem;}
+  .wrap{padding:0 1.1rem;}
+}
+@media(max-width:480px){
+  .safety-grid{grid-template-columns:1fr;}
+  .foot-inner{flex-direction:column;text-align:center;}
+  .foot-links{justify-content:center;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="./index.html" class="nav-back">← Back to Nexus</a>
+  <span class="nav-logo">Nexus.</span>
+</nav>
+
+<div class="wrap">
+
+  <!-- PAGE HEADER -->
+  <div class="page-head reveal">
+    <span class="lbl">How Nexus is organised</span>
+    <h1>The full picture.</h1>
+    <p>Everything here is the real structure — how roles work, who does what, how groups form, how safety is handled, and what the long-term vision is.</p>
+  </div>
+
+  <!-- ══ SECTION 1: THREE LAYERS ══ -->
+  <div class="section reveal">
+    <span class="lbl">The structure</span>
+    <h2 style="font-family:'Syne',sans-serif;font-size:clamp(1.4rem,3vw,1.9rem);font-weight:800;letter-spacing:-.025em;margin-bottom:.6rem;">Three layers. One platform.</h2>
+    <p style="font-size:.92rem;color:var(--muted);max-width:560px;line-height:1.75;">Nexus runs on Discord. The server is divided into three levels, each with a different function and a different kind of leadership.</p>
+
+    <div class="layer-stack">
+      <div class="layer-item" style="border-top-color:rgba(124,111,236,.3);background:rgba(124,111,236,.06);">
+        <div class="layer-num" style="color:var(--vlt);">Layer 1 — The Platform</div>
+        <div class="layer-name">⚡ Nexus</div>
+        <div class="layer-desc">The whole server. One shared Discord space that everyone is part of. Server-wide announcements, community guidelines, and the admin team live here. This is the home base for everything below it.</div>
+      </div>
+      <div class="layer-arrow">↓</div>
+      <div class="layer-item" style="background:rgba(52,211,153,.05);">
+        <div class="layer-num" style="color:var(--emerald);">Layer 2 — Interest Domains</div>
+        <div class="layer-name">🗂️ Domains</div>
+        <div class="layer-desc">Broad interest areas — Social Discussion, Art, Environment, Sports, Startups, Books, Board Games, Outdoors, Running, Anime, and more. Each domain has its own channel and a Domain Leader. Domains are the organising layer between the whole platform and individual groups.</div>
+      </div>
+      <div class="layer-arrow">↓</div>
+      <div class="layer-item" style="border-bottom-color:rgba(251,191,36,.25);background:rgba(251,191,36,.04);">
+        <div class="layer-num" style="color:var(--amber);">Layer 3 — Discussion Groups</div>
+        <div class="layer-name">💬 Groups</div>
+        <div class="layer-desc">Small, focused groups inside each domain. These are where the real conversations happen — on a specific topic, interest, or activity. Groups are application-based and kept deliberately small. Each group has a student Group Leader who manages membership and shapes the culture. Groups can and should meet offline — that's the point.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 2: ROLES ══ -->
+  <div class="section reveal" style="transition-delay:.05s;">
+    <span class="lbl">Roles</span>
+    <h2 style="font-family:'Syne',sans-serif;font-size:clamp(1.4rem,3vw,1.9rem);font-weight:800;letter-spacing:-.025em;margin-bottom:.6rem;">Who does what.</h2>
+    <p style="font-size:.92rem;color:var(--muted);max-width:560px;line-height:1.75;">Every role in Nexus is held by a student. There are no teachers, no school administrators, no external organisations with authority inside the platform.</p>
+
+    <div class="role-grid" style="margin-top:1.75rem;">
+
+      <!-- Admin -->
+      <div class="role-card violet">
+        <div class="role-icon">⚡</div>
+        <div class="role-title">Admin Team</div>
+        <div class="role-sub violet">Platform-level · appointed</div>
+        <div class="role-body">The admin team runs the platform as a whole. They are not members of any single domain — they sit above the domain structure and oversee everything.</div>
+        <div class="resp-list">
+          <div class="resp-item"><div class="resp-dot violet"></div>Maintain the server — channels, permissions, bot settings</div>
+          <div class="resp-item"><div class="resp-dot violet"></div>Approve new members after reviewing their expression of interest</div>
+          <div class="resp-item"><div class="resp-dot violet"></div>Handle safety incidents and escalate serious cases to the eSafety Commissioner if needed</div>
+          <div class="resp-item"><div class="resp-dot violet"></div>Connect Domain Leaders with external organisations when requested</div>
+          <div class="resp-item"><div class="resp-dot violet"></div>Run monthly community check-ins to keep the platform healthy</div>
+          <div class="resp-item"><div class="resp-dot violet"></div>Facilitate the first offline events in the early stage</div>
+        </div>
+      </div>
+
+      <!-- Domain Leader -->
+      <div class="role-card emerald">
+        <div class="role-icon">🏅</div>
+        <div class="role-title">Domain Leader</div>
+        <div class="role-sub emerald">Domain-level · appointed by admin</div>
+        <div class="role-body">Each Domain Leader oversees everything within their interest area. They are the link between individual groups and the admin team.</div>
+        <div class="resp-list">
+          <div class="resp-item"><div class="resp-dot emerald"></div>Post weekly updates or discussion prompts in their domain channel</div>
+          <div class="resp-item"><div class="resp-dot emerald"></div>Meet (casually) with Group Leaders inside their domain at least once a month</div>
+          <div class="resp-item"><div class="resp-dot emerald"></div>Receive requests from Group Leaders for external collaboration and pass them to admin</div>
+          <div class="resp-item"><div class="resp-dot emerald"></div>Flag inactive groups or members to admin</div>
+          <div class="resp-item"><div class="resp-dot emerald"></div>Help new members find the right group</div>
+        </div>
+      </div>
+
+      <!-- Group Leader -->
+      <div class="role-card amber">
+        <div class="role-icon">👑</div>
+        <div class="role-title">Group Leader</div>
+        <div class="role-sub amber">Group-level · self-proposed or appointed</div>
+        <div class="role-body">Group Leaders run a specific discussion group. They set the direction, accept or decline membership requests, and are responsible for the quality of the group.</div>
+        <div class="resp-list">
+          <div class="resp-item"><div class="resp-dot amber"></div>Define the group's focus and keep it on track</div>
+          <div class="resp-item"><div class="resp-dot amber"></div>Review and accept membership requests (short written message required)</div>
+          <div class="resp-item"><div class="resp-dot amber"></div>Propose and organise offline meetups for the group</div>
+          <div class="resp-item"><div class="resp-dot amber"></div>Post at least once per week to keep the group active</div>
+          <div class="resp-item"><div class="resp-dot amber"></div>Report issues to their Domain Leader</div>
+        </div>
+      </div>
+
+      <!-- Member -->
+      <div class="role-card sky">
+        <div class="role-icon">✅</div>
+        <div class="role-title">Member</div>
+        <div class="role-sub sky">Group-level · application-based</div>
+        <div class="role-body">Regular members are the core of Nexus. Getting in isn't automatic — you apply to a specific group with a short message about why you want to join. This keeps groups intentional and high-quality.</div>
+        <div class="resp-list">
+          <div class="resp-item"><div class="resp-dot sky"></div>Participate actively in at least one group</div>
+          <div class="resp-item"><div class="resp-dot sky"></div>Show up to offline meetups when possible</div>
+          <div class="resp-item"><div class="resp-dot sky"></div>Respect community guidelines at all times</div>
+          <div class="resp-item"><div class="resp-dot sky"></div>Report anything that feels unsafe or wrong via the report channel</div>
+          <div class="resp-item"><div class="resp-dot sky"></div>Can propose a new group or domain at any time</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ SECTION 3: HOW GROUPS FORM ══ -->
+  <div class="section reveal" style="transition-delay:.05s;">
+    <span class="lbl">How groups form</span>
+    <h2 style="font-family:'Syne',sans-serif;font-size:clamp(1.4rem,3vw,1.9rem);font-weight:800;letter-spacing:-.025em;margin-bottom:.6rem;">Groups are proposed, not assigned.</h2>
+    <p style="font-size:.92rem;color:var(--muted);max-width:560px;line-height:1.75;">Anyone can propose a group. No one is placed in one automatically. The process is designed to make sure groups form around genuine interest — not random assignment.</p>
+
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-num" style="background:rgba(124,111,236,.15);border:1.5px solid rgba(124,111,236,.3);color:var(--vlt);">1</div>
+        <div>
+          <h4>Anyone proposes a group</h4>
+          <p>A member (or prospective member) has an idea for a group — a topic, activity, or interest. They post the idea in the relevant domain channel. There's no form. Just write it.</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num" style="background:rgba(52,211,153,.1);border:1.5px solid rgba(52,211,153,.25);color:var(--emerald);">2</div>
+        <div>
+          <h4>Domain Leader reviews it</h4>
+          <p>The Domain Leader checks whether the idea fits the domain and whether there's enough interest. If yes, they pass it to admin to set up the channel.</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num" style="background:rgba(251,191,36,.1);border:1.5px solid rgba(251,191,36,.25);color:var(--amber);">3</div>
+        <div>
+          <h4>Group is created and a leader is appointed</h4>
+          <p>Admin creates the group channel. The person who proposed it usually becomes the Group Leader — unless someone else is better suited. The leader sets the group's focus and rules.</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num" style="background:rgba(56,189,248,.1);border:1.5px solid rgba(56,189,248,.25);color:var(--sky);">4</div>
+        <div>
+          <h4>Members apply to join</h4>
+          <p>Anyone interested sends a short message to the Group Leader — a few sentences about why they want to join. The leader reads it and decides. No one is added automatically.</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num" style="background:rgba(52,211,153,.12);border:1.5px solid rgba(52,211,153,.3);color:var(--emerald);">✓</div>
+        <div>
+          <h4>The group starts meeting</h4>
+          <p>Online first — Discord. Offline as soon as it's feasible. A café, a park, a library, wherever makes sense. Offline activity is actively encouraged, never required.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 4: EXTERNAL COLLABORATION ══ -->
+  <div class="section reveal" style="transition-delay:.05s;">
+    <span class="lbl">External connections</span>
+    <h2 style="font-family:'Syne',sans-serif;font-size:clamp(1.4rem,3vw,1.9rem);font-weight:800;letter-spacing:-.025em;margin-bottom:.6rem;">How Nexus connects to the outside world.</h2>
+    <p style="font-size:.92rem;color:var(--muted);max-width:580px;line-height:1.75;">One of Nexus's long-term goals is to connect student groups with external organisations — NGOs, universities, companies, community groups. Here's exactly how that works, and who controls it.</p>
+
+    <div class="flow" style="margin-top:1.75rem;">
+      <div class="flow-step">
+        <div class="flow-num" style="background:rgba(251,191,36,.1);border:1.5px solid rgba(251,191,36,.25);color:var(--amber);">1</div>
+        <div>
+          <h4>Group Leader makes a request</h4>
+          <p>A Group Leader wants to connect with an external organisation — e.g. an environmental NGO, a university research team, a local business. They write a short proposal: what the group is, what they want to do together, and why.</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num" style="background:rgba(52,211,153,.1);border:1.5px solid rgba(52,211,153,.25);color:var(--emerald);">2</div>
+        <div>
+          <h4>Domain Leader reviews and passes to admin</h4>
+          <p>The Domain Leader checks the proposal makes sense for the domain and that the group is active enough to follow through. Then it goes to admin.</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num" style="background:rgba(124,111,236,.15);border:1.5px solid rgba(124,111,236,.3);color:var(--vlt);">3</div>
+        <div>
+          <h4>Admin makes the connection</h4>
+          <p>Admin contacts the external organisation. This is the only point where someone outside Nexus is involved. Admin introduces the platform, explains what the group wants to do, and facilitates the initial contact. The group then takes it from there.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box" style="margin-top:1.5rem;">
+      <p><strong>Important:</strong> External organisations do not have access to the Discord server. They do not moderate, observe, or participate in internal discussions. The only contact they have is with the admin team and, after introduction, with the specific group that requested the connection.</p>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 5: SAFETY ══ -->
+  <div class="section reveal" style="transition-delay:.05s;">
+    <span class="lbl">Safety</span>
+    <h2 style="font-family:'Syne',sans-serif;font-size:clamp(1.4rem,3vw,1.9rem);font-weight:800;letter-spacing:-.025em;margin-bottom:.6rem;">How safety is handled.</h2>
+    <p style="font-size:.92rem;color:var(--muted);max-width:580px;line-height:1.75;">Nexus is an independent student community. There is no school involvement. Safety is handled entirely by the student admin team, operating in line with Australian government online safety guidelines.</p>
+
+    <div class="safety-grid">
+      <div class="safety-item">
+        <h4>Entry</h4>
+        <p>Everyone completes an expression of interest. Admin reviews each application. No one is admitted automatically. Anonymous accounts are not accepted.</p>
+      </div>
+      <div class="safety-item">
+        <h4>Verification</h4>
+        <p>New members confirm they are Australian high school students. Admin aims to conduct a short (15-minute) onboarding conversation with each new member before access is granted.</p>
+      </div>
+      <div class="safety-item">
+        <h4>Discord setup</h4>
+        <p>New members can only see welcome channels until they complete onboarding. Full access is granted by admin after the onboarding step is done.</p>
+      </div>
+      <div class="safety-item">
+        <h4>Reporting</h4>
+        <p>There is a dedicated <strong style="color:var(--text);">#report-an-issue</strong> channel. Members can write there — only admin can read it. Reports are acknowledged within 24 hours.</p>
+      </div>
+      <div class="safety-item">
+        <h4>Moderation</h4>
+        <p>Admin monitors all public channels. Minor issues are handled by admin directly. Serious issues are escalated to the eSafety Commissioner's reporting system.</p>
+      </div>
+      <div class="safety-item">
+        <h4>Offline meetings</h4>
+        <p>Offline meetings are encouraged in public places — cafés, parks, libraries. Members are advised never to share personal addresses. The first meeting with someone new should always be in a public space.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:1.5rem;padding:1.1rem 1.35rem;background:rgba(248,113,113,.06);border:1px solid rgba(248,113,113,.18);border-radius:12px;">
+      <p style="font-size:.85rem;color:var(--muted);line-height:1.65;"><strong style="color:var(--rose);">Legal framework:</strong> Nexus operates in line with the Australian <em>Online Safety Act 2021</em> and the eSafety Commissioner's guidelines for safe digital participation by young people. As an education and community support platform, Nexus falls outside the social media age restriction laws that apply to platforms like Instagram and TikTok. If you have safety concerns, you can contact the eSafety Commissioner at <a href="https://www.esafety.gov.au/report" style="color:var(--rose);text-decoration:none;">esafety.gov.au/report</a>.</p>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 6: COMMUNITY RULES ══ -->
+  <div class="section reveal" style="transition-delay:.05s;">
+    <span class="lbl">Community guidelines</span>
+    <h2 style="font-family:'Syne',sans-serif;font-size:clamp(1.4rem,3vw,1.9rem);font-weight:800;letter-spacing:-.025em;margin-bottom:.6rem;">The rules. Short version.</h2>
+    <p style="font-size:.92rem;color:var(--muted);max-width:560px;line-height:1.75;margin-bottom:0;">These apply everywhere — online and offline, in every group, in every domain.</p>
+
+    <div class="rule-list">
+      <div class="rule">
+        <div class="rule-mark">01</div>
+        <p><strong>Be respectful.</strong> Disagree with ideas, not people. Debate is welcome. Hostility is not.</p>
+      </div>
+      <div class="rule">
+        <div class="rule-mark">02</div>
+        <p><strong>No harassment, discrimination, or hate speech.</strong> Any content targeting someone's identity, background, or beliefs will result in immediate removal.</p>
+      </div>
+      <div class="rule">
+        <div class="rule-mark">03</div>
+        <p><strong>No sharing personal information.</strong> Don't share your address, phone number, or school timetable. Don't ask others for theirs. This applies online and offline.</p>
+      </div>
+      <div class="rule">
+        <div class="rule-mark">04</div>
+        <p><strong>Stay in your lane.</strong> If you're in the Chess group, don't spam the Skiing group. Keep conversations in the right channels.</p>
+      </div>
+      <div class="rule">
+        <div class="rule-mark">05</div>
+        <p><strong>No screenshots without consent.</strong> What happens in Nexus stays in Nexus unless the people involved agree otherwise.</p>
+      </div>
+      <div class="rule">
+        <div class="rule-mark">06</div>
+        <p><strong>Report, don't retaliate.</strong> If something feels wrong, use #report-an-issue. Admin handles it. Don't escalate it yourself.</p>
+      </div>
+      <div class="rule">
+        <div class="rule-mark">07</div>
+        <p><strong>Be present.</strong> If you join a group, show up. Groups exist because people chose to be in them. Don't join and disappear — it's not fair on the people who are active.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 7: VISION ══ -->
+  <div class="section reveal" style="transition-delay:.05s;">
+    <span class="lbl">The long-term vision</span>
+    <h2 style="font-family:'Syne',sans-serif;font-size:clamp(1.4rem,3vw,1.9rem);font-weight:800;letter-spacing:-.025em;margin-bottom:.6rem;">Where this is going.</h2>
+    <p style="font-size:.92rem;color:var(--muted);max-width:580px;line-height:1.75;margin-bottom:1.5rem;">Nexus starts as one Discord server. But the structure is designed to scale — to multiple schools, multiple communities, and eventually real connections with organisations and institutions that can give students access to the wider world.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;">
+      <div style="background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:1.25rem;">
+        <div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--violet);line-height:1;margin-bottom:.5rem;">01</div>
+        <h4 style="font-family:'Syne',sans-serif;font-size:.88rem;font-weight:700;margin-bottom:.35rem;">One school</h4>
+        <p style="font-size:.8rem;color:var(--muted);line-height:1.55;">Start with a single community. Build the culture, test the structure, prove the model.</p>
+      </div>
+      <div style="background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:1.25rem;">
+        <div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--emerald);line-height:1;margin-bottom:.5rem;">02</div>
+        <h4 style="font-family:'Syne',sans-serif;font-size:.88rem;font-weight:700;margin-bottom:.35rem;">Multiple schools</h4>
+        <p style="font-size:.8rem;color:var(--muted);line-height:1.55;">Add school chapters. Students from different schools share domains and cross-school groups form naturally around shared interests.</p>
+      </div>
+      <div style="background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:1.25rem;">
+        <div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--amber);line-height:1;margin-bottom:.5rem;">03</div>
+        <h4 style="font-family:'Syne',sans-serif;font-size:.88rem;font-weight:700;margin-bottom:.35rem;">Society</h4>
+        <p style="font-size:.8rem;color:var(--muted);line-height:1.55;">Active groups connect with NGOs, universities, companies. Students encounter the real world while still at school — on their own terms.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:1.5rem;padding:1.5rem;background:linear-gradient(135deg,rgba(124,111,236,.09),rgba(52,211,153,.05));border:1px solid rgba(124,111,236,.18);border-radius:14px;position:relative;overflow:hidden;">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--violet),var(--emerald));"></div>
+      <p style="font-size:.92rem;color:var(--text);line-height:1.75;font-style:italic;">"The goal isn't to build the biggest community. It's to build the one where the right people find each other — and then actually do something together."</p>
+      <p style="font-size:.78rem;color:var(--dim);margin-top:.75rem;">— Nexus founder</p>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-row reveal">
+    <a href="./index.html#join" class="btn btn-primary">Join Nexus →</a>
+    <a href="./admin.html" class="btn btn-outline">⚡ Join the admin team</a>
+    <a href="./status.html" class="btn btn-outline">See current status</a>
+  </div>
+
+</div><!-- /wrap -->
+
+<footer>
+  <div class="wrap">
+    <div class="foot-inner">
+      <div><div class="foot-brand">Nexus.</div><div class="foot-sub">Independent Student Community · Australia</div></div>
+      <div class="foot-links">
+        <a href="./index.html">Home</a>
+        <a href="./status.html">Status</a>
+        <a href="./admin.html" style="color:var(--vlt);">⚡ Admin</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.06 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
